@@ -4,7 +4,7 @@ Overview
 This is a web-based application where students can rate their colleges anonymously based on various aspects like campus, placement, faculty, hostel, food, and more.  
 
 Features  
- User authentication (Signup/Login with college ID verification)  
+ User authentication (Signup/Login ) 
  Search for colleges  
  Submit and view anonymous ratings  
  Categories include campus, placement, infrastructure, hostel, food, etc.  
