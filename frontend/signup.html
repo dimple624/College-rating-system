@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2><center>Signup</center></h2>
+  <form id="signupForm">
+    <input type="text" id="collegeId" placeholder="College ID" required><br>
+    <input type="text" id="name" placeholder="Name" required><br>
+    <input type="text" id="username" placeholder="Username" required><br>
+    <input type="password" id="password" placeholder="Password" required><br>
+    <button type="submit">Signup</button>
+  </form>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const collegeId = document.getElementById("collegeId").value;
+      const name = document.getElementById("name").value;
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      const response = await fetch("/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ collegeId, name, username, password }),
+      });
+
+      const result = await response.text();
+      alert(result);
+      if (response.status === 200) window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>

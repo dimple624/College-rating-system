@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rate College</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2><center>Rate Your College</center></h2>
+  <form id="ratingForm">
+    <label for="collegeName">College:</label><input type="text" id="collegeName" placeholder="College Name" required><br>
+    <label for="campus">Campus:</label><input type="number" id="campus" min="1" max="5"><br>
+    <label for="placement">Placement:</label><input type="number" id="placement" min="1" max="5"><br>
+    <label for="faculty">Faculty:</label><input type="number" id="faculty" min="1" max="5"><br>
+    <label for="library">Library:</label><input type="number" id="library" min="1" max="5"><br>
+    <label for="hostel">Hostel:</label><input type="number" id="hostel" min="1" max="5"><br>
+    <label for="food">Food:</label><input type="number" id="food" min="1" max="5"><br>
+    <label for="infrastructure">Infrastructure:</label><input type="number" id="infrastructure" min="1" max="5"><br>
+    <label for="culturalEvents">Cultural Events:</label><input type="number" id="culturalEvents" min="1" max="5"><br>
+    <label for="sports">Sports:</label><input type="number" id="sports" min="1" max="5"><br>
+    <label for="labs">Labs:</label><input type="number" id="labs" min="1" max="5"><br>
+    <label for="review">Review:</label><textarea id="review" placeholder="Leave a review (optional)"></textarea><br>
+    <button type="submit">Submit Rating</button>
+  </form>
+
+  <script>
+    document.getElementById("ratingForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const token = localStorage.getItem("token");
+      const collegeName = document.getElementById("collegeName").value;
+      const ratings = {
+        campus: document.getElementById("campus").value,
+        placement: document.getElementById("placement").value,
+        faculty: document.getElementById("faculty").value,
+        library: document.getElementById("library").value,
+        hostel: document.getElementById("hostel").value,
+        food: document.getElementById("food").value,
+        infrastructure: document.getElementById("infrastructure").value,
+        culturalEvents: document.getElementById("culturalEvents").value,
+        sports: document.getElementById("sports").value,
+        labs: document.getElementById("labs").value,
+      };
+      const review = document.getElementById("review").value;
+
+      const response = await fetch("/rate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` 
+        },
+        body: JSON.stringify({ collegeName, ratings, review }),
+      });
+
+      const result = await response.text();
+      alert(result);
+      if (response.status === 200) window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>

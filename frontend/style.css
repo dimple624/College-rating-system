@@ -1,0 +1,256 @@
+/* General styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #e7ded9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styling */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 30px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5em;
+    font-weight: 600;
+}
+h2{
+    margin-top: 20px;
+    color: #02610a;
+}
+
+/* Adding Doodles to the Button */
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #e28802;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #885202;
+}
+
+/* Username styling */
+.username {
+    font-weight: bold;  /* Makes the username bolder */
+    color: #333333;     /* Darker shade of text */
+    font-size: 1.1rem;   /* Optional: increase font size for better visibility */
+}
+
+/* Form styling */
+form {
+    background-color: rgb(206, 234, 197);
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    font-weight: 500;
+}
+
+form input,
+form textarea {
+    width: 99%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+form button:hover {
+    background-color: #034607;
+}
+
+/* Search Section */
+#search {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#searchBar {
+    width: 50%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #b7b5b5;
+    border-radius: 4px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+#searchBar:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2);
+}
+
+#searchButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+#searchButton:hover {
+    background-color: #054d08;
+}
+
+/* Ratings Section */
+#ratings {
+    margin: 20px auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 1200px;
+}
+
+#ratings-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.college-item {
+    background-color: #d5e1d2;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 80%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.college-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.college-item h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #4CAF50;
+}
+
+.college-item ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+}
+
+.college-item ul li {
+    margin: 8px 0;
+    padding: 4px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Ratings container layout (Horizontal Rating Elements) */
+.ratings-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;  /* Space between the rating elements */
+    margin-bottom: 20px;
+}
+
+/* Individual rating element styling */
+.rating {
+    background-color: #a6d19b;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #4CAF50;
+    display: flex;
+    flex-direction: column;  /* Keeps text elements aligned vertically inside */
+    justify-content: space-between;
+    width: 220px; /* Makes the rating elements wider */
+}
+
+/* Add margins to individual rating items */
+.rating p {
+    display: inline-block;
+    margin: 5px 0;
+    font-size: 14px;
+    text-align: left;
+    
+}
+/* Make sure stars are displayed inline */
+.star {
+    display: inline-block;
+    font-size: 15px; /* Adjust size of stars as needed */
+    margin-right: 5px; /* Optional: space between stars */
+  }
+  
+
+.username{
+    font-weight: bold;
+    text-align: left;
+}
+
+/* No Results Message */
+#no-results {
+    text-align: center;
+    font-size: 18px;
+    color: #ff4444;
+    margin-top: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .college-item {
+        width: 95%; /* Adjust width for smaller screens */
+        padding: 15px; /* Reduce padding for compact view */
+    }
+
+    /* Ratings Section for smaller screens */
+    .ratings-container {
+        display: flex;
+        flex-wrap: wrap;  /* Allow wrapping on small screens */
+        gap: 10px;
+        justify-content: center;
+    }
+
+    /* Individual rating item styling */
+    .rating {
+        width: 120px;  /* Adjust width for smaller screens */
+    }
+}

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Rating</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <header>
+    <h1>College Rating System</h1>
+    <button onclick="window.location.href='signup.html'">Signup</button>
+    <button onclick="window.location.href='login.html'">Login</button>
+  </header>
+
+  <section id="search">
+    <div class="search-container">
+      <input
+        type="text"
+        id="searchBar"
+        placeholder="Search for a college..."
+      />
+      <button id="searchButton">🔍 Search</button>
+    </div>
+  </section>
+
+  <section id="ratings">
+    <div id="college-ratings">
+      <ul id="ratings-list">
+        <!-- Ratings will be inserted here dynamically -->
+      </ul>
+    </div>
+    <p id="no-results" style="display: none;">College not found.</p>
+  </section>
+
+  <script>
+    const searchBar = document.getElementById("searchBar");
+    const searchButton = document.getElementById("searchButton");
+    const ratingsList = document.getElementById("ratings-list");
+    const noResults = document.getElementById("no-results");
+
+    // Fetch and display all colleges
+    function displayColleges(colleges) {
+      ratingsList.innerHTML = ""; // Clear the list
+      colleges.forEach(college => {
+        const collegeItem = document.createElement("li");
+        collegeItem.classList.add("college-item");
+
+        const collegeName = document.createElement("h3");
+        collegeName.innerText = college.collegeName;
+        collegeItem.appendChild(collegeName);
+
+        const ratingsContainer = document.createElement("div");
+        ratingsContainer.classList.add("ratings-container");
+
+        college.ratings.forEach(rating => {
+          const ratingDiv = document.createElement("div");
+          ratingDiv.classList.add("rating");
+
+          // Display the username of the user who submitted the rating
+          const ratingUsername = document.createElement("p");
+          ratingUsername.classList.add("username");
+          ratingUsername.innerText = `${rating.username}`;  // Display username
+          ratingDiv.appendChild(ratingUsername);
+
+          ratingDiv.innerHTML += `
+            <p>Campus: ${getStars(rating.ratings.campus)}</p>
+            <p>Placement: ${getStars(rating.ratings.placement)}</p>
+            <p>Faculty: ${getStars(rating.ratings.faculty)}</p>
+            <p>Library: ${getStars(rating.ratings.library)}</p>
+            <p>Hostel: ${getStars(rating.ratings.hostel)}</p>
+            <p>Food: ${getStars(rating.ratings.food)}</p>
+            <p>Infrastructure: ${getStars(rating.ratings.infrastructure)}</p>
+            <p>Cultural Events: ${getStars(rating.ratings.culturalEvents)}</p>
+            <p>Sports: ${getStars(rating.ratings.sports)}</p>
+            <p>Labs: ${getStars(rating.ratings.labs)}</p>
+          `;
+          if (rating.review) {
+            ratingDiv.innerHTML += `<p><strong>Review:</strong> ${rating.review}</p>`;
+          }
+
+          ratingsContainer.appendChild(ratingDiv);
+        });
+
+        collegeItem.appendChild(ratingsContainer);
+        ratingsList.appendChild(collegeItem);
+      });
+    }
+
+    // Fetch all colleges initially
+    fetch("/colleges")
+      .then(response => response.json())
+      .then(data => displayColleges(data))
+      .catch(err => console.error("Error fetching colleges:", err));
+
+    // Search for a specific college
+    searchButton.addEventListener("click", () => {
+      const query = searchBar.value.trim();
+      if (!query) return;
+
+      fetch(`/colleges?name=${encodeURIComponent(query)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.length === 0) {
+            ratingsList.innerHTML = "";
+            noResults.style.display = "block";
+          } else {
+            noResults.style.display = "none";
+            displayColleges(data);
+          }
+        })
+        .catch(err => console.error("Error searching for college:", err));
+    });
+
+    // Function to convert rating number to stars
+    function getStars(rating) {
+      let stars = '';
+      const totalStars = 5;
+      for (let i = 0; i < totalStars; i++) {
+        stars +=  `<span class="star">${i < rating ? '⭐' : '☆'}</span>`;
+      }
+      return stars;
+    }
+  </script>
+</body>
+</html>
